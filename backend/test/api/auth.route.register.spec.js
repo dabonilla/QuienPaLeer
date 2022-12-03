@@ -21,7 +21,7 @@ describe('Pruebas sobre la funcionalidad de registro de usuario', () => {
 
         const newUser = {
             email: "xiyega6103@deitada.com",
-            password: "qweqwe123",
+            password: process.env.USER_PASSWORD,
             name: "ivan",
             lastName: "morales",
             phone: "1234567"
@@ -90,12 +90,12 @@ describe('Pruebas sobre la funcionalidad de registro de usuario', () => {
 
 
             it('El servidor devuelve el código 500', async() => {
-                const response = await request(app).post(endpoint).send({...newUser, password: "12345"});
+                const response = await request(app).post(endpoint).send({...newUser, password: process.env.USER_WRONG_PASSWORD});
                 expect(response.statusCode).toBe(500);
             });
 
             it('Se devuele el mensaje: La contraseña debe de ser al menos de 6 carácteres', async() => {
-                const response = await request(app).post(endpoint).send({...newUser, password: "12345"});
+                const response = await request(app).post(endpoint).send({...newUser, password: process.env.USER_WRONG_PASSWORD});
                 expect(response.body.message).toBe('La contraseña debe de ser al menos de 6 carácteres');
             });
 
@@ -111,7 +111,7 @@ describe('Pruebas sobre la funcionalidad de registro de usuario', () => {
             [
                 {
                     // Falta el email
-                    password: "qweqwe123",
+                    password: process.env.USER_PASSWORD,
                     name: "ivan",
                     lastName: "morales",
                     phone: "1234567"
@@ -133,7 +133,7 @@ describe('Pruebas sobre la funcionalidad de registro de usuario', () => {
                 {
                     // Falta el apellido
                     email: "testUser@unal.edu.co",
-                    password: "qweqwe123",
+                    password: process.env.USER_PASSWORD,
                     name: "ivan",
                     phone: "1234567"
                 },

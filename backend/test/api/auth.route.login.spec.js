@@ -84,7 +84,7 @@ describe('\nPruebas sobre la funcionalidad de login de usuario', () => {
 
         describe('Dado un correo no registrado', () => {
 
-            const badInputLogin = { email: "noregistrado@correo.com", password: "qweqwe123" };
+            const badInputLogin = { email: "noregistrado@correo.com", password: process.env.USER_PASSWORD };
 
 
             it('Devuelve el código 401', async () => {
@@ -105,7 +105,7 @@ describe('\nPruebas sobre la funcionalidad de login de usuario', () => {
 
             it('Devuelve el código 401', async () => {
 
-                const response = await request(app).post(endpoint).send({ ...loginInput, password: "anotherpassword" });
+                const response = await request(app).post(endpoint).send({ ...loginInput, password: process.env.USER_ANOTHER_PASSWORD });
                 expect(response.statusCode).toBe(401);
 
 
@@ -113,7 +113,7 @@ describe('\nPruebas sobre la funcionalidad de login de usuario', () => {
 
             it('Devuelve el mensaje: La contraseña es incorrecta', async () => {
 
-                const response = await request(app).post(endpoint).send({ ...loginInput, password: "anotherpassword" });
+                const response = await request(app).post(endpoint).send({ ...loginInput, password: process.env.USER_ANOTHER_PASSWORD });
                 expect(response.body.message).toBe('La contraseña es incorrecta');
 
             });

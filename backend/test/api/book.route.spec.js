@@ -12,11 +12,11 @@ const cleanDatabase = async () => {
 };
 const loginInput = {
     email: "testUser@unal.edu.co",
-    password: "qweqwe123"
+    password: process.env.USER_PASSWORD
 };
 const newUser = {
     email: "testUser@unal.edu.co",
-    password: "qweqwe123",
+    password: process.env.USER_PASSWORD,
     name: "ivan",
     lastName: "morales",
     phone: "1234567"

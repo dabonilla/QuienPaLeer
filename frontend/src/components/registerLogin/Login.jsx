@@ -8,6 +8,8 @@ import Swal from 'sweetalert2'
 import { useNavigate, Link } from "react-router-dom";
 const ApiHeroku=import.meta.env.VITE_API
 const baseURL = ApiHeroku+'api/auth/login'
+const validation = "Ingrese una contraseña"
+const validation2 = "La contraseña debe tener almenos 8 carácteres del alfabeto ingles"
 const Login = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -37,8 +39,8 @@ const Login = () => {
     const newErrors = {}
     if (!email || email === '') newErrors.email = 'Ingresa un correo'
     if (!emailPattern.test(email)) newErrors.email = 'Ingrese un correo válido'
-    if (!password || password === '') newErrors.password = 'Ingrese una contraseña'
-    if (!passwordPattern.test(password)) newErrors.password = 'La contraseña debe tener almenos 8 carácteres del alfabeto ingles'
+    if (!password || password === '') newErrors.password = validation
+    if (!passwordPattern.test(password)) newErrors.password = validation2
 
     return newErrors
   }
