@@ -10,6 +10,7 @@ const ApiHeroku=import.meta.env.VITE_API
 const baseURL = ApiHeroku+'api/auth/login'
 const validation = "Ingrese una contraseña"
 const validation2 = "La contraseña debe tener almenos 8 carácteres del alfabeto ingles"
+const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 const Login = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
@@ -34,7 +35,7 @@ const Login = () => {
 
   const validateForm = () => {
     const { email, password } = inputs
-    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    
     const passwordPattern = /^[A-Za-z0-9]{8,20}$/
     const newErrors = {}
     if (!email || email === '') newErrors.email = 'Ingresa un correo'
