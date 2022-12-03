@@ -126,7 +126,7 @@ describe('Pruebas sobre la funcionalidad de registro de usuario', () => {
                 {
                     // Falta el el nombre
                     email: "testUser@unal.edu.co",
-                    password: "qweqwe123",
+                    password: process.env.USER_PASSWORD,
                     lastName: "morales",
                     phone: "1234567"
                 },
@@ -140,7 +140,7 @@ describe('Pruebas sobre la funcionalidad de registro de usuario', () => {
                 {
                     // Falta el número telefónico
                     email: "testUser@unal.edu.co",
-                    password: "qweqwe123",
+                    password: process.env.USER_PASSWORD,
                     name: "ivan",
                     lastName: "morales"
                 }

@@ -8,6 +8,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 const ApiHeroku=import.meta.env.VITE_API
 const baseURL = ApiHeroku+'api/auth/register'
+const validation = 'Ingrese una contraseña'
+const validation2 = 'La contraseña debe tener almenos 8 carácteres del alfabeto ingles'
 
 function Register() {
 
@@ -55,8 +57,8 @@ function Register() {
     if (!emailPattern.test(email)) newErrors.email = 'Ingrese un correo válido'
     if (!phone || phone === '') newErrors.phone = 'Ingrese un número telefónico'
     if (!phonePattern.test(phone)) newErrors.phone = 'Ingrese un número telefónico válido. Ej: 3001234567'
-    if (!password || password === '') newErrors.password = 'Ingrese una contraseña'
-    if (!passwordPattern.test(password)) newErrors.password = 'La contraseña debe tener almenos 8 carácteres del alfabeto ingles'
+    if (!password || password === '') newErrors.password = validation
+    if (!passwordPattern.test(password)) newErrors.password = validation2
     if (!confirmPassword || confirmPassword === '') newErrors.confirmPassword = 'Ingrese la confirmación de la contraseña'
     if (confirmPassword !== password) newErrors.confirmPassword = 'Las contraseña no coincide'
     return newErrors
