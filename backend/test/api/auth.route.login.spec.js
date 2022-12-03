@@ -10,16 +10,16 @@ const app = makeApp(database);
 
 
 const newUser = {
-    email: "testUser@unal.edu.co",
-    password: "qweqwe123",
-    name: "ivan",
-    lastName: "morales",
-    phone: "1234567"
+    email: process.env.USER_EMAIL,
+    password: process.env.USER_PASSWORD,
+    name: process.env.USER_NAME,
+    lastName: process.env.USER_LASTNAME,
+    phone: process.env.USER_PHONE
 };
 
 const loginInput = {
-    email: "testUser@unal.edu.co",
-    password: "qweqwe123"
+    email: process.env.USER_EMAIL,
+    password: process.env.USER_PASSWORD
 };
 
 const cleanDatabase = async () => {

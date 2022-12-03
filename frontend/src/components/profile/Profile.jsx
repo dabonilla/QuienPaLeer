@@ -51,8 +51,6 @@ const Profile = ({ myProfile }) => {
         if (currentUser && user) {
             if (currentUser._id !== user._id )
                 return <button className='btn' id='btnSendMessage' onClick={handleSendMessage}>Enviar Mensaje</button>
-        }else{
-            null
         }
     };
 
