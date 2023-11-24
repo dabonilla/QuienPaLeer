@@ -7,7 +7,7 @@ import SideBar from './SideBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/ContentStyle.css';
 import Content from "./ContentHome";
-import '../css/ContentHome.css';
+//import '../css/ContentHome.css';
 import Spinner from './SpinnerCircular';
 const ApiHeroku=import.meta.env.VITE_API
 import { io } from "socket.io-client";
