@@ -2,10 +2,11 @@
 import '../../css/Login.css';
 import LogoQPLBlack from "../../assets/img/QPL_Logo_Black.png";
 import { FaEye } from "react-icons/fa";
-import { React, useState } from "react";
+import { React, useState,useRef } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { useNavigate, Link } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 const ApiHeroku=import.meta.env.VITE_API
 const baseURL = "https://127.0.0.1:5000/"+'api/auth/login'
 const validation = "Ingrese una contraseña"
@@ -17,6 +18,9 @@ const Login = () => {
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const captcha=useRef(null);
+  const [captchaValido, setCaptchaValido] = useState(null);
+  const [usuarioValido, setUsuarioValido] = useState(false);
 
 
   const handleChange = (event) => {
@@ -51,7 +55,13 @@ const Login = () => {
     const formErros = validateForm();
     if (Object.keys(formErros).length > 0) {
       setErrors(formErros)
-    } else {
+    }
+    else if(!captcha.current.getValue()){
+        console.log("Por favor acepta el captcha");
+        setCaptchaValido(false)
+    }
+    else {
+      setCaptchaValido(true)
       axios.post(baseURL, {
         email: inputs.email,
         password: inputs.password
@@ -110,7 +120,11 @@ const Login = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-
+  function onChange(value) {
+    if ( captcha.current.getValue()){
+      console.log("El usuario no es un robot");
+    }
+  }
   return (
     <div className="d-flex align-content-center justify-content-center vh-100">
       <div className="card my-auto">
@@ -193,7 +207,16 @@ const Login = () => {
               >
                 Entrar
               </button>
+
             </div>
+            <div className="recaptcha mt-2 d-flex justify-content-center align-content-center">
+              <ReCAPTCHA
+                ref={captcha}
+                sitekey="6LcDlB8pAAAAABObuDH_2WIUbMpARturxyQbxbzV"
+                onChange={onChange}
+                />
+            </div>
+            {captchaValido === false && <div className="error-captcha d-flex justify-content-center align-content-center text-danger">Por favor acepta el captcha.</div>}
           </form>
         </div>
         <div className="card-footer d-flex justify-content-center align-content-center">

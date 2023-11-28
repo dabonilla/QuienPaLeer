@@ -2,10 +2,12 @@
 import '../../css/Register.css'
 import LogoQPLBlack from '../../assets/img/QPL_Logo_Black.png';
 import { FaEye } from "react-icons/fa";
-import {React, useState } from "react";
+import {React, useState,useRef } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import ReCAPTCHA from "react-google-recaptcha";
+
 const ApiHeroku=import.meta.env.VITE_API
 const baseURL = "https://127.0.0.1:5000/"+'api/auth/register'
 const validation = 'Ingrese una contraseña'
@@ -18,6 +20,8 @@ function Register() {
   const [isChecked, setCheck] = useState(false);
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState({});
+  const captchaFormRegister=useRef(null);
+  const [captchaValidoFormRegister, setCaptchaValidoFormRegister] = useState(null);
   const navigate = useNavigate();
 
   const togglePasswordVisiblity = () => {
@@ -69,7 +73,11 @@ function Register() {
     const formErros = validateForm();
     if (Object.keys(formErros).length > 0) {
       setErrors(formErros)
+    }else if(!captchaFormRegister.current.getValue()){
+      //console.log("Por favor acepta el captcha");
+      setCaptchaValidoFormRegister(false)
     } else {
+      setCaptchaValidoFormRegister(true)
       axios.post(baseURL, inputs)
         .then(async (response) => {
 
@@ -122,6 +130,11 @@ function Register() {
 
 
         });
+    }
+  }
+  function onChange(value) {
+    if ( captchaFormRegister.current.getValue()){
+      console.log("El usuario no es un robot");
     }
   }
 
@@ -227,6 +240,14 @@ function Register() {
               <div className='col form-group'>
                 <button className='btn btn-sm' id='submitRegister' type='submit' disabled={isChecked ? false : true} onClick={handleSumbitRegister}>Registrarse</button>
               </div>
+              <div className="recaptcha mt-2 d-flex justify-content-center align-content-center">
+              <ReCAPTCHA
+                ref={captchaFormRegister}
+                sitekey="6LcDlB8pAAAAABObuDH_2WIUbMpARturxyQbxbzV"
+                onChange={onChange}
+                />
+            </div>
+            {captchaValidoFormRegister === false && <div className="error-captcha d-flex justify-content-center align-content-center text-danger">Por favor acepta el captcha.</div>}
             </div>
           </form>
         </div>
