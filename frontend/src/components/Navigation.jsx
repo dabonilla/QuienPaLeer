@@ -17,7 +17,7 @@ import { useState,React } from 'react';
 import { useNavigate } from 'react-router-dom';
 const ApiHeroku=import.meta.env.VITE_API
 
-const baseURL = ApiHeroku + 'api/auth/logout'
+const baseURL = "https://127.0.0.1:5000/" + 'api/auth/logout'
 
 function Navigation(user) {
     const navigate = useNavigate();

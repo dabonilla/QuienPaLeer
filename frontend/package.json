@@ -1,10 +1,12 @@
 {
   "name": "frontend",
   "private": true,
-  "proxy": "http://127.0.0.1:5000/",
+  "proxy": "https://127.0.0.1:5000/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start":
+      "set HTTPS=true && set SSL_CRT_FILE=./.cert/cert.pem && set SSL_KEY_FILE=./.cert/key.pem && vite",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

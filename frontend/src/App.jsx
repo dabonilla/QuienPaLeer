@@ -13,7 +13,7 @@ const ApiHeroku=import.meta.env.VITE_API
 
 function App() {
 
-  const baseURL = ApiHeroku+'api/profile/myInfo';
+  const baseURL = "https://127.0.0.1:5000/"+'api/profile/myInfo';
   const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(null);
   const navigate = useNavigate();
 

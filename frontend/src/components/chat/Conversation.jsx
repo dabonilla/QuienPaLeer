@@ -4,7 +4,7 @@ import {useState, useEffect } from "react";
 import axios from "axios";
 const ApiHeroku=import.meta.env.VITE_API
 
-const baseUrl = ApiHeroku+'api/users';
+const baseUrl = "https://127.0.0.1:5000/"+'api/users';
 
 export default function Conversation({ conversation, userId }) {
 

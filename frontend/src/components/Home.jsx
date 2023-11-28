@@ -14,7 +14,7 @@ import { io } from "socket.io-client";
 
 const Home = () => {
 
-    const baseURL = ApiHeroku+'api/profile/myInfo'
+    const baseURL = "https://127.0.0.1:5000/"+'api/profile/myInfo'
     const [user, setUser] = useState(null)
     const navigate = useNavigate();
     const location = useLocation();
